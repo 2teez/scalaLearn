@@ -10,11 +10,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  setup:
-    runs-on: [ubuntu-latest, macOs-latest]
+  build:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-      - name: Script echo
-        run: echo "Starting out scala programming..."
+      - name: Set up Scala
+        uses: coursier/cache-action@v6
+      - name: Install sbt
+        uses: sbt/setup-sbt@v1
+      - name: Echo start
+        run: echo "Starting out Scala programming..."
