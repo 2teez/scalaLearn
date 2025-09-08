@@ -16,8 +16,8 @@ function help() {
     echo "-h -   getting to display the help function."
     echo "-p -   create other folders that might be needed in a structured scala poject."
     echo "-r -   run a scala file."
-    echo "-s     save the file or project using gitter, which calls git."
-    echo "-S    script run of scala standalone file, using scala."
+    echo "-s -   save the file or project using gitter, which calls git."
+    echo "-S -   script run of scala standalone file, using scala."
     echo
     exit 1
 }
