@@ -11,6 +11,7 @@ function help() {
     echo "Avaliable Options:"
     echo "-a -   create github action workflow into the specified directory."
     echo "-b -   using scalac. Create a binary jvm code using scala"
+    echo "-c -   compile scala file using scalac"
     echo "-d -   deleting the file specified."
     echo "-g -   generating a single standalone scala file, then run the file."
     echo "-h -   getting to display the help function."
@@ -54,8 +55,7 @@ function create_scala_file() {
     [[ -e "${file}" ]] && file="${file%.*}_.scala"
     file="${file%.*}.scala"
     file_without_ext="${file%.*}"
-    echo "
-    package com.progscala3.${file%.*}
+    echo "package com.progscala3.${file%.*}
 
     @main def ${file_without_ext^}(args: String*): Unit =
     		println(\"Hello, World!\")
@@ -70,7 +70,7 @@ fi
 
 # optstring consist of
 # scalac, cargo new <folder>
-optstring="a:d:g:r:s:S:h"
+optstring="a:d:c:g:r:s:S:h"
 while getopts "${optstring}" opt; do
     case "${opt}" in
         a)
@@ -79,11 +79,18 @@ while getopts "${optstring}" opt; do
 
             make_github_action_workflow "${directory}"
         ;;
+        c)
+            file="${OPTARG}"
+            check_file_ext "${file}"
+            scalac -d . "${file}"
+            scala -cp . "${file}"
+
+        ;;
         d)
             file="${OPTARG}"
 
             for my_file in $(ls | grep -i "${file}"); do
-                while read -p "Do you want to delete ${my_file} [y|n]?: " ans; do
+                while read -p -r "Do you want to delete ${my_file} [y|n]?: " ans; do
                     case "${ans,,}" in
                         y)
                             rm -rf "${my_file}"
@@ -109,7 +116,7 @@ while getopts "${optstring}" opt; do
             # running a standalone scala file
             filename="${OPTARG,,}"
             check_file_ext "${filename}"
-            scala "${filename}" #2>/dev/null
+            scala -d . "${filename}" #2>/dev/null
         ;;
         s)
             filename="${OPTARG}"
