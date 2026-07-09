@@ -109,7 +109,7 @@ while getopts "${optstring}" opt; do
             # running a standalone scala file
             filename="${OPTARG,,}"
             check_file_ext "${filename}"
-            scala "${filename}" 2>/dev/null
+            scala "${filename}" #2>/dev/null
         ;;
         s)
             filename="${OPTARG}"
