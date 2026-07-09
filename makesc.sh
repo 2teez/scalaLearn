@@ -58,7 +58,7 @@ function create_scala_file() {
     echo "package com.progscala3.${file%.*}
 
     @main def ${file_without_ext^}(args: String*): Unit =
-    		println(\"Hello, World!\")
+        println(\"Hello, World!\")
 
     " > "${file^}"
 }
@@ -81,19 +81,20 @@ while getopts "${optstring}" opt; do
         ;;
         c)
             file="${OPTARG}"
-            check_file_ext "${file}"
             scalac -d . "${file}"
-            scala -cp . "${file}"
+            scala "${file}"
 
         ;;
         d)
             file="${OPTARG}"
 
             for my_file in $(ls | grep -i "${file}"); do
-                while read -p -r "Do you want to delete ${my_file} [y|n]?: " ans; do
+                while read -r -p "Do you want to delete ${my_file} [y|n]?: " ans; do
                     case "${ans,,}" in
                         y)
                             rm -rf "${my_file}"
+                            my_file="${my_file%.*}"
+                            rm -rf "com/progscala3/${my_file,,}"
                             echo "${my_file} deleted!"
                             break
                             ;;
