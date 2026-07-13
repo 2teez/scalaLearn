@@ -3,6 +3,8 @@ package com.progscala3.checker
 import java.io.Console
 
 @main def main(args: String*): Unit =
-  val name = System.console().readLine("Enter a name: ")
-  if name == null then return
-  println(name.exists(_.isUpper))
+  println(User.input("Enter a name: ").exists(_.isUpper))
+
+  object User:
+    def input(prompt: String): String =
+      System.console().readLine(prompt)
