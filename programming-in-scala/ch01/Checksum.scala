@@ -8,9 +8,6 @@ package com.progscala3.checksum
   println(csa.checksum())
 
 class ChecksumAccumulator:
-   private var sum = 0
-
-   def add(b: Byte): Unit =
-     sum += b
-
-   def checksum(): Int = ~(sum & 0xFF) + 1
+  private var sum        = 0
+  def add(b: Byte): Unit = sum += b
+  def checksum(): Int    = ~(sum & 0xff) + 1
