@@ -51,13 +51,14 @@ function check_file_ext() {
 }
 
 function create_scala_file() {
-    file="${1,,}"
+    file="${1,}"
     [[ -e "${file}" ]] && file="${file%.*}_.scala"
     file="${file%.*}.scala"
-    file_without_ext="${file%.*}"
-    echo "package com.progscala3.${file%.*}
+    #file_without_ext="${file%.*}"
+    package_filename="${file%.*}"
+    echo "package com.progscala3.${package_filename,,}
 
-    @main def ${file_without_ext^}(args: String*): Unit =
+    @main def main(args: String*): Unit =
         println(\"Hello, World!\")
 
     " > "${file^}"
