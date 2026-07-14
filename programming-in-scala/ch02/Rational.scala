@@ -1,9 +1,12 @@
 package com.progscala3.rational
 
-class Rational(n: Int, d: Int):
+class Rational(val n: Int, val d: Int):
   require(d != 0)
+  private val g = gcd(n.abs, d.abs)
   def this(n: Int) = this(n, 1)
-  override def toString: String = s"Rational($n/$d)"
+  override def toString: String = s"Rational(${n / g}/${d / g})"
+  private def gcd(a: Int, b: Int): Int =
+    if b == 0 then a else gcd(b, a % b)
 
 object Rational:
   def apply(n: Int, d: Int): Rational =
