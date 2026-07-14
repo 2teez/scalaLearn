@@ -8,6 +8,7 @@ package com.progscala3.table
 
   // using recursion
   println(makeTable(6, 6))
+  printTable(3, 3, makeTable, "recursion table maker:")
 
   def makeWhileTable(rows: Int, cols: Int): Unit =
     var row = 1
@@ -38,3 +39,7 @@ package com.progscala3.table
       row <- 1 until rows
     yield makeRow(row))
       .mkString("\n")
+
+  def printTable(rows: Int, cols: Int, tableMaker: (Int, Int) => String, msg: String): Unit =
+    println(msg)
+    println(tableMaker(rows, cols))
