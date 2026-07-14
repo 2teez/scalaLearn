@@ -9,7 +9,7 @@ import FileMatcher._
 object FileMatcher:
   private def filesGetter: Array[File] = new File(".").listFiles()
 
-  def filesEnding(query: String): Seq[File] =
+  def filesEnding(query: String): Array[File] =
     // filesGetter.filter(_.getName.endsWith(query))
     for file <- filesGetter if file.getName.endsWith(query)
     yield file
