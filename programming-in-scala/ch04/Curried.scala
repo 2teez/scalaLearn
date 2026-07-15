@@ -1,5 +1,7 @@
 package com.progscala3.curried
 
+import Curried.displayln
+
 @main def main(args: String*): Unit =
   val twoPlusis = curried(2)
   println(twoPlusis)
@@ -9,6 +11,7 @@ package com.progscala3.curried
 
 def curried(x: Int)(y: Int): Int = x + y
 
-def displayln(value: => Unit, label: String): Unit =
-  print(label)
-  value
+object Curried:
+  def displayln(value: => Unit, label: String): Unit =
+    print(label)
+    value
