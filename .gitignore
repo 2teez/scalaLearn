@@ -3,3 +3,4 @@
 .scala-build
 .metals
 com
+*_.scala
