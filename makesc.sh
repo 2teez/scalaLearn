@@ -13,7 +13,8 @@ function help() {
     echo "-b -   using scalac. Create a binary jvm code using scala"
     echo "-c -   compile scala file using scalac"
     echo "-d -   deleting the file specified."
-    echo "-g -   generating a single standalone scala file, then run the file."
+    echo "-g -   compile all the stated scala files and run the compiled binary."
+    echo "-o -   generating a single standalone scala file, then run the file."
     echo "-h -   getting to display the help function."
     echo "-p -   create other folders that might be needed in a structured scala poject."
     echo "-r -   run a scala file."
@@ -65,13 +66,25 @@ function create_scala_file() {
 }
 
 
-if [[ "$#" -ne 2 ]]; then
-	help
+if [[ "$#" -ge 2 ]]; then
+    for file in "${@:2}"; do
+        printf "\r\033[KProcessing %s" "$file"
+
+        if scalac "$file" 2>/dev/null; then
+            class="${file%.scala}"
+            scala "$class" 2>/dev/null
+            printf "\r\033[KCompleted %s\n" "$file"
+        else
+            printf "\r\033[KFailed compiling %s\n" "$file"
+        fi
+    done
+else
+    help
 fi
 
 # optstring consist of
 # scalac, cargo new <folder>
-optstring="a:d:c:g:r:s:S:h"
+optstring="a:d:c:o:g:r:s:S:h"
 while getopts "${optstring}" opt; do
     case "${opt}" in
         a)
@@ -108,6 +121,13 @@ while getopts "${optstring}" opt; do
             done
         ;;
         g)
+            # compile all the stated scala files and run the compiled binary
+            for file in "${@:2}"; do
+                scalac "${file}"
+            done
+            scala "${@:2}"
+        ;;
+        o)
         # create a scala file from the scratch and compile it
             filename="${OPTARG}"
             create_scala_file "${filename}"
