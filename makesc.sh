@@ -65,8 +65,8 @@ function create_scala_file() {
     " > "${file^}"
 }
 
-
-if [[ "$#" -ge 2 ]]; then
+[ "$#" -lt 2 ] && help
+if [[ "$#" -gt 2 ]]; then
     for file in "${@:2}"; do
         printf "\r\033[KProcessing %s" "$file"
 
@@ -78,8 +78,6 @@ if [[ "$#" -ge 2 ]]; then
             printf "\r\033[KFailed compiling %s\n" "$file"
         fi
     done
-else
-    help
 fi
 
 # optstring consist of
