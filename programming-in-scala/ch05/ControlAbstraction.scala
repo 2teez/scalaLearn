@@ -1,9 +1,10 @@
 package com.progscala3.controlabstraction
 
 import scala.io.StdIn
+import major._
 
 @main def main(args: String*): Unit =
-  val age = userInput("Enter your age:").toInt
+  val age = userInput("Enter your age: ").toInt
   // using if expression
   if age < 18 then
     println("You are a minor. You can't vote.")
@@ -12,12 +13,18 @@ import scala.io.StdIn
 
   // using match expression
   age match
-    case age if age < 18 => println("You are a minor. You can't vote.")
+    case age if age < 18  => println("You are a minor. You can't vote.")
     case age if age >= 18 => println("You are an adult.")
 
   // using control abstraction
+  checkAge(age)(_ >= 18)
+  checkAge(age) { _ < 18 }
 
-object ControlAbstraction:
+object major:
   def userInput(msg: String): String =
-    println(msg)
+    print(msg)
     StdIn.readLine().trim
+
+  def checkAge(age: Int)(f: Int => Boolean): Unit =
+    if f(age) then println("You are an adult.")
+    else println("You are a minor. You can't vote.")
