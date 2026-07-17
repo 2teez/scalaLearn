@@ -63,6 +63,7 @@ function create_scala_file() {
         println(\"Start, Here!\")
 
     " > "${file^}"
+    scalafmt "${file^}"
 }
 
 [ "$#" -lt 2 ] && help
