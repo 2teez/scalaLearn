@@ -18,13 +18,21 @@ import major._
 
   // using control abstraction
   checkAge(age)(_ >= 18)
-  checkAge(age) { _ < 18 }
+  checkAge(age,
+    whenTrue = "You are a minor. You can't vote",
+    whenFalse = "You are an adult.") {
+    _ < 18
+  }
 
 object major:
   def userInput(msg: String): String =
     print(msg)
     StdIn.readLine().trim
 
-  def checkAge(age: Int)(f: Int => Boolean): Unit =
-    if f(age) then println("You are an adult.")
-    else println("You are a minor. You can't vote.")
+  def checkAge(
+      age: Int,
+      whenTrue: String = "You are an adult.",
+      whenFalse: String = "You are a minor. You can't vote."
+  )(f: Int => Boolean): Unit =
+    if f(age) then println(whenTrue)
+    else println(whenFalse)
