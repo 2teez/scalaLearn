@@ -59,7 +59,7 @@ function create_scala_file() {
     echo "package com.progscala3.${package_filename,,}
 
     @main def main(args: String*): Unit =
-        println(\"Hello, World!\")
+        println(\"Start, Here!\")
 
     " > "${file^}"
 }
