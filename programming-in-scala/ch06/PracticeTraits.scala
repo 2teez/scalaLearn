@@ -5,7 +5,6 @@ trait Philosophical:
     println("I consume memory, therefore I am!")
 
 trait HasLegs
-
 class Animal
 class Frog extends Animal, Philosophical, HasLegs:
   override def toString: String = "green!"
