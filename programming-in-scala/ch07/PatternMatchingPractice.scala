@@ -1,5 +1,13 @@
 package com.progscala3.patternmatchingpractice
 
+  import expressions.*
+
+  def simplifyTop(expr: Expr): Expr =
+    expr match
+      case UnOp("-", UnOp("-", e)) => e
+      case BinOp("+", e, Num(0)) => e
+      case BinOp("*", e, Num(1)) => e
+      case _ => expr
 package expressions:
   trait Expr
   case class Var(name: String) extends Expr
@@ -8,7 +16,6 @@ package expressions:
   case class BinOp(operator: String, left: Expr, right: Expr) extends Expr
 
 package main:
-  import expressions.*
-
   @main def main(args: String*): Unit =
-      println("Start, Here!")
+    val x = Var("21")
+    println(BinOp(("*"), x, Num(23)))
