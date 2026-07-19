@@ -83,7 +83,7 @@ fi
 
 # optstring consist of
 # scalac, cargo new <folder>
-optstring="a:d:c:o:g:r:s:S:h"
+optstring="a:c:d:o:g:r:s:S:h"
 while getopts "${optstring}" opt; do
     case "${opt}" in
         a)
