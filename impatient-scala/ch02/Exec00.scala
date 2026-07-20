@@ -12,7 +12,7 @@ import ArrayPractice.*
   generateExclusiveArray(randomNumber).foreach(print)
   println()
   //
-  val num = Array(1,2,3,4,5,6)
+  val num = Array(1, 2, 3, 4, 5, 6)
   //var counter = 0
   val buffer2 = ArrayBuffer[Int]()
   var index = 0
@@ -23,9 +23,19 @@ import ArrayPractice.*
       buffer2 += (first, second)
     index += 2
   println(buffer2)
+  //
+  // Average of array of double, and arraybuffer of doubles
+  val arraysOfDoubles: Array[Double] = Array(4.5, 1.01, 3.8, 0.09, 4.13)
+  println(averageOf(arraysOfDoubles))
 
 package ArrayPractice:
   import scala.collection.mutable.ArrayBuffer
+
+  def averageOf(values: Array[Double]): Double =
+    var sum = 0.0D
+    for n <- values do sum += n
+    sum / values.size.toDouble
+
 
   def swapper(first: Int, second: Int): (Int, Int) = (second, first)
   def generateInclusiveArray(n: Int): Array[Int] =
