@@ -27,6 +27,7 @@ import ArrayPractice.*
   // Average of array of double, and arraybuffer of doubles
   val arraysOfDoubles: Array[Double] = Array(4.5, 1.01, 3.8, 0.09, 4.13)
   println(averageOf(arraysOfDoubles))
+  println(generateRandomDoubleNumbers(5).sortInPlace().mkString(","))
 
 package ArrayPractice:
 
@@ -46,3 +47,6 @@ package ArrayPractice:
     val buffer = ArrayBuffer[Int]()
     for num <- 0 until n do buffer += num
     buffer.toArray
+  def generateRandomDoubleNumbers(n: Int): Array[Double] =
+    val rand = Random()
+    (for _ <- 0 to n yield f"${rand.nextDouble(10)%10.2f}".toDouble).toArray
