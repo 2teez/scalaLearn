@@ -1,6 +1,7 @@
 package com.progscala3.exec00
 
 import java.util.Random
+import scala.collection.mutable.ArrayBuffer
 import com.progscala3.util.Util.*
 import ArrayPractice.*
 
@@ -10,10 +11,23 @@ import ArrayPractice.*
   println()
   generateExclusiveArray(randomNumber).foreach(print)
   println()
+  //
+  val num = Array(1,2,3,4,5,6)
+  //var counter = 0
+  val buffer2 = ArrayBuffer[Int]()
+  var index = 0
+  while index <= num.length - 1 do
+    if index == num.length - 1 then buffer2 += num(index)
+    else
+      val (first, second) = swapper(num(index), num(index+1))
+      buffer2 += (first, second)
+    index += 2
+  println(buffer2)
 
 package ArrayPractice:
   import scala.collection.mutable.ArrayBuffer
 
+  def swapper(first: Int, second: Int): (Int, Int) = (second, first)
   def generateInclusiveArray(n: Int): Array[Int] =
     val buffer = ArrayBuffer[Int]()
     for num <- 0 to n do buffer += num
