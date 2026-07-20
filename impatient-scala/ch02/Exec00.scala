@@ -29,7 +29,6 @@ import ArrayPractice.*
   println(averageOf(arraysOfDoubles))
 
 package ArrayPractice:
-  import scala.collection.mutable.ArrayBuffer
 
   def averageOf(values: Array[Double]): Double =
     var sum = 0.0D
