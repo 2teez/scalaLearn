@@ -13,9 +13,14 @@ package Functions:
       (for _ <- 0 to len yield rand.nextInt(size)).toArray
 
 @main def main(args: String*): Unit =
-  val array = generateRandomArray(len = 0)
+  val array = generateRandomArray()
   array.foreach(print)
   println()
+  println(
+    minmax(array) match
+      case Some(min, max) => s"$min, $max"
+      case _ => "None"
+  )
   println(
     minmax(Array[Int]()) match
       case Some(min, max) => s"$min, $max"
