@@ -37,17 +37,23 @@ enum MeasuringTypes(value: Double, name: String) extends Display:
     value: Double,
     name: String = "km") extends MeasuringTypes(value, name)
 
+  override def toString(): String = s"$value $name"
+
 package conversions:
+
   object Conversions:
+    private val InchesToCm = 2.54
+    private val GallonsToLiters = 4.54609
+    private val MilesToKm = 1.60934
 
     def inchesToCentimeters(value: Inches): Centimeters =
-      Centimeters(value.value * 2.54)
+      Centimeters(value.value * InchesToCm)
 
     def gallonsToLiters(value: Gallons): Liters =
-      Liters(value.value * 0.22)
+      Liters(value.value * GallonsToLiters)
 
     def milesToKilometers(value: Miles): Kilometers =
-      Kilometers(value.value * 1.60934)
+      Kilometers(value.value * MilesToKm)
 
 @main def main(args: String*): Unit =
    inchesToCentimeters(Inches(23)).display("23 inches is ")
