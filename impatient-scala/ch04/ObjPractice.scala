@@ -49,7 +49,10 @@ package conversions:
     def inchesToCentimeters(value: Inches): Centimeters =
       Centimeters(value.value * InchesToCm)
 
-    def gallonsToLiters(value: Gallons): Liters =
+    // interesting showing that gallonsToLiters
+    // can be used in the general package even
+    // when declared as private
+    private [objpractice] def gallonsToLiters(value: Gallons): Liters =
       Liters(value.value * GallonsToLiters)
 
     def milesToKilometers(value: Miles): Kilometers =
